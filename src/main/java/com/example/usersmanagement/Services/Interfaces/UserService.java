@@ -1,6 +1,7 @@
 package com.example.usersmanagement.Services.Interfaces;
 
 import com.example.usersmanagement.Errors.ApiException;
+import com.example.usersmanagement.Models.DTOs.ChangePhoneRequestDTO;
 import com.example.usersmanagement.Models.DTOs.UserRequestDTO;
 import com.example.usersmanagement.Models.DTOs.UserResponseDTO;
 
@@ -12,4 +13,8 @@ public interface UserService {
     UserResponseDTO getById(long id) throws ApiException;
 
     List<UserResponseDTO> getAll(String firstName);
+
+    UserResponseDTO changePhoneNumber(long id, ChangePhoneRequestDTO changePhoneRequestDTO) throws ApiException;
+
+    void deleteBy(long id);
 }

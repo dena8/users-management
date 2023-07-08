@@ -14,6 +14,8 @@ public class UserResponseDTO {
     @JsonProperty("birth_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date birthDate;
+    @JsonProperty("phone_number")
+    private String phoneNumber;
 
     @JsonProperty("created_at")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssX")
@@ -32,6 +34,10 @@ public class UserResponseDTO {
 
     public Date getBirthDate() {
         return birthDate;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public Timestamp getCreatedAt() {

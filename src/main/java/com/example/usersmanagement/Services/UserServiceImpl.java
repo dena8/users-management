@@ -1,16 +1,18 @@
 package com.example.usersmanagement.Services;
 
 import com.example.usersmanagement.Errors.ApiException;
+import com.example.usersmanagement.Models.DTOs.ChangePhoneRequestDTO;
 import com.example.usersmanagement.Models.DTOs.UserRequestDTO;
 import com.example.usersmanagement.Models.DTOs.UserResponseDTO;
 import com.example.usersmanagement.Models.Entities.UserEntity;
 import com.example.usersmanagement.Models.Repositories.UsersRepository;
 import com.example.usersmanagement.Services.Interfaces.UserCriteriaService;
 import com.example.usersmanagement.Services.Interfaces.UserService;
-import jakarta.transaction.Transactional;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -47,6 +49,21 @@ public class UserServiceImpl implements UserService {
         List<UserEntity> users = this.userCriteriaService.findOrderUsers(firstName);
         return modelMapper.map(users, new TypeToken<List<UserResponseDTO>>() {
         }.getType());
+    }
+
+    @Transactional
+    @Override
+    public UserResponseDTO changePhoneNumber(long id, ChangePhoneRequestDTO changePhoneRequestDTO) throws ApiException {
+        UserEntity user = getUserOrThrowEx(id);
+        UserEntity userEntity = user.setPhoneNumber(changePhoneRequestDTO.getPhoneNumber());
+
+        return this.modelMapper.map(userEntity, UserResponseDTO.class);
+    }
+
+    @Transactional
+    @Override
+    public void deleteBy(long id) {
+        this.usersRepository.deleteById(id);
     }
 
     private UserEntity getUserOrThrowEx(long id) throws ApiException {

@@ -2,6 +2,7 @@ package com.example.usersmanagement.Controllers;
 
 import com.example.usersmanagement.Errors.ApiException;
 import com.example.usersmanagement.Errors.ErrorResponse;
+import com.example.usersmanagement.Models.DTOs.ChangePhoneRequestDTO;
 import com.example.usersmanagement.Models.DTOs.UserRequestDTO;
 import com.example.usersmanagement.Services.Interfaces.UserService;
 import org.springframework.http.MediaType;
@@ -36,6 +37,17 @@ public class UsersController {
     @PostMapping
     public ResponseEntity<?> register(@RequestBody UserRequestDTO userRequestDTO) {
         return ResponseEntity.ok(this.userService.createUser(userRequestDTO));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> changePhoneNumber(@PathVariable long id, @RequestBody ChangePhoneRequestDTO changePhoneRequestDTO) throws ApiException {
+        return ResponseEntity.ok(this.userService.changePhoneNumber(id, changePhoneRequestDTO));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable long id) {
+        this.userService.deleteBy(id);
+        return ResponseEntity.ok().build();
     }
 
 }
