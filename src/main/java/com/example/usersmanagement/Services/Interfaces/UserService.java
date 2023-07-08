@@ -17,4 +17,6 @@ public interface UserService {
     UserResponseDTO changePhoneNumber(long id, ChangePhoneRequestDTO changePhoneRequestDTO) throws ApiException;
 
     void deleteBy(long id);
+
+    boolean isExist(Long id);
 }

@@ -66,6 +66,11 @@ public class UserServiceImpl implements UserService {
         this.usersRepository.deleteById(id);
     }
 
+    @Override
+    public boolean isExist(Long id) {
+        return this.usersRepository.existsById(id);
+    }
+
     private UserEntity getUserOrThrowEx(long id) throws ApiException {
         return this.usersRepository.findById(id).orElseThrow(() -> new ApiException(USER_NOT_FOUND));
     }
