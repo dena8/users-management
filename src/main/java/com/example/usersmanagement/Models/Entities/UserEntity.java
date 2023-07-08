@@ -72,7 +72,7 @@ public class UserEntity {
     }
 
     @Column( nullable = false,unique = true)
-    @Pattern(regexp = "[A-Za-z._1-9]+@[a-z]+[.][a-z]+")
+    @Pattern(regexp = "[A-Za-z._1-9]+@[a-z]+[.][a-z]+",message = "email must be valid!")
     public String getEmail() {
         return email;
     }
