@@ -3,6 +3,7 @@ package com.example.usersmanagement.Models.Entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 import java.sql.Timestamp;
@@ -91,7 +92,7 @@ public class UserEntity {
         this.createdAt = createdAt;
         return this;
     }
-    @CreationTimestamp
+    @UpdateTimestamp
     @Column(name = "updated_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     public Timestamp getUpdatedAt() {
         return updatedAt;

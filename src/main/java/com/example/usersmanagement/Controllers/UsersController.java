@@ -35,7 +35,7 @@ public class UsersController {
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = UserEntity.class))})
     })
-    @GetMapping()
+    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAll(@RequestParam(name = "first_name", required = false) String firstName) {
         return ResponseEntity.ok(this.userService.getAll(firstName));
     }
@@ -50,7 +50,7 @@ public class UsersController {
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = UserEntity.class))}),
     })
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getUserById(@PathVariable long id) {
         try {
             return ResponseEntity.ok(this.userService.getById(id));
@@ -74,7 +74,7 @@ public class UsersController {
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = UserEntity.class))}),
     })
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> register(@RequestBody @Valid UserRequestDTO userRequestDTO, Errors errors) {
         if (errors.hasErrors()) {
             return new ErrorResponse(errors).getResponse();
@@ -107,7 +107,7 @@ public class UsersController {
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = UserEntity.class))}),
     })
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> delete(@PathVariable @ExistId(message = "User not found") Long id) {
         this.userService.deleteBy(id);
         return ResponseEntity.ok().build();

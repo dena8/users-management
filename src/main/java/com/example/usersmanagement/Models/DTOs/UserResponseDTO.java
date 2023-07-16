@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class UserResponseDTO {
+    private String id;
     @JsonProperty("first_name")
     private String firstName;
     @JsonProperty("last_name")
@@ -23,6 +24,10 @@ public class UserResponseDTO {
     @JsonProperty("updated_at")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssX")
     private Timestamp updatedAt;
+
+    public String getId() {
+        return id;
+    }
 
     public String getFirstName() {
         return firstName;
