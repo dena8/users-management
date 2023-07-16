@@ -10,3 +10,10 @@ This command opens the PostgreSQL CLI as the default postgres user.
 4. Within the PostgreSQL CLI, create the database by executing the following command:
   CREATE DATABASE users_db;
 After completing these steps, the PostgreSQL database is set up and ready to be used by Spring application.
+5. Execute command to create JAR file
+  mvn package -DskipTests
+6. Execute following command to build docker image on spring application
+  docker build -t user-management:0.0.1 .
+7. Execute command to start spring application
+  docker run -p 8080:8080 --network <network-on-postgres-container>  user-management:0.0.1
+
